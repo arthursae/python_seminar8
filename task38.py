@@ -77,7 +77,7 @@ def delete_data(file_name: str, at_row: int) -> [str]:
 
 
 def display_menu():
-    print('\nМЕНЮ:')
+    print('\n*** МЕНЮ ***')
     print('0 - Отобразить список всех записей')
     print('1 - Поиск по ключевому слову')
     print('2 - Добавить новую запись')
@@ -87,31 +87,36 @@ def display_menu():
 
 
 def switchboard():
+    # display_menu()
     mode = int(input('Введите опцию 0-5: '))
     while True:
         match mode:
             case 0:
                 all_entries = get_entries(file_name)
-                print('Все записи:')
+                print('*** Все записи ***')
                 for entry_id, row in enumerate(all_entries):
                     print(f'{entry_id} – {row}')
                 return switchboard()
             case 1:
+                print('*** Поиск ***')
                 keyword = input('Введите ключевое слово для поиска: ')
                 found_data = find_data(file_name, keyword)
                 print(f'Найдено: {len(found_data)}')
                 print(*output_data(file_name, found_data), sep='\n')
                 return switchboard()
             case 2:
+                print('*** Добавление новой записи ***')
                 new_entry = input('Введите ФИО, телефон: ')
                 add_data(file_name, new_entry)
                 return switchboard()
             case 3:
-                entry_id = int(input('Введите номер записи, которую нужно изменть: '))
-                update_entry = input('Введите новые данные ФИО, телефон: ')
+                print('*** Изменение записи ***')
+                entry_id = int(input('Введите номер записи: '))
+                update_entry = input('Введите новые данные – ФИО, телефон: ')
                 update_data(file_name, update_entry, entry_id)
                 return switchboard()
             case 4:
+                print('*** Удаление записи ***')
                 delete_id = int(input('Введите номер записи которую нужно удалить: '))
                 delete_data(file_name, delete_id)
                 return switchboard()
