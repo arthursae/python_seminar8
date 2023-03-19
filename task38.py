@@ -29,7 +29,7 @@ def save_data(file_name: str, file_source: str):
 def add_data(file_name: str, data: str):
     with open(file_name, 'a', encoding="utf-8") as file:
         file.write(f'{data}\n')
-        print(f'Данные добавлены')
+        print(f'Данные добавлены\n')
 
 
 def output_data(file_name: str, rows: [int]) -> [str]:
@@ -60,9 +60,9 @@ def update_data(file_name: str, new_entry: str, at_row: int):
         for entry in entries:
             entries_formated += entry + '\n'
         save_data(file_name, entries_formated)
-        print(f'Данные в строке {at_row} обновлены')
+        print(f'Данные в строке {at_row} обновлены\n')
     else:
-        print(f'Нет данных в строке {at_row}')
+        print(f'Нет данных в строке {at_row}\n')
 
 
 def delete_data(file_name: str, at_row: int) -> [str]:
@@ -71,9 +71,9 @@ def delete_data(file_name: str, at_row: int) -> [str]:
         entries.pop(at_row)
         entries_formated = ''.join([i + '\n' for i in entries])
         save_data(file_name, entries_formated)
-        print(f'Данные в строке {at_row} удалены')
+        print(f'Данные в строке {at_row} удалены\n')
     else:
-        print(f'Нет данных в строке {at_row}')
+        print(f'Нет данных в строке {at_row}\n')
 
 def display_menu():
     print('0 - Отобразить список всех записей')
@@ -81,11 +81,12 @@ def display_menu():
     print('2 - Добавить новую запись')
     print('3 - Изменить запись')
     print('4 - Удалить запись')
-    print('5 - Выйти')
+    print('5 - Выйти\n')
 
 
 def switchboard():
-    mode = int(input('Введите опцию 0-5: '))
+    display_menu()
+    mode = int(input('\nВведите опцию 0-5: '))
     while True:
         match mode:
             case 0:
@@ -116,5 +117,4 @@ def switchboard():
                 return False
 
 file_name = 'data.txt'
-display_menu()
 switchboard()
