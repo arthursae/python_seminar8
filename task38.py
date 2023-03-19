@@ -76,7 +76,7 @@ def delete_data(file_name: str, at_row: int) -> [str]:
         print(f'Нет данных в строке {at_row}\n')
 
 def display_menu():
-    print('0 - Отобразить список всех записей')
+    print('\n0 - Отобразить список всех записей')
     print('1 - Поиск по ключевому слову')
     print('2 - Добавить новую запись')
     print('3 - Изменить запись')
@@ -86,7 +86,7 @@ def display_menu():
 
 def switchboard():
     display_menu()
-    mode = int(input('\nВведите опцию 0-5: '))
+    mode = int(input('Введите опцию 0-5: '))
     while True:
         match mode:
             case 0:
