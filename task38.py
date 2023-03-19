@@ -75,15 +75,13 @@ def delete_data(file_name: str, at_row: int) -> [str]:
     else:
         print(f'Нет данных в строке {at_row}')
 
-
-print('0 - Отобразить список всех записей')
-print('1 - Поиск по ключевому слову')
-print('2 - Добавить новую запись')
-print('3 - Изменить запись')
-print('4 - Удалить запись')
-print('5 - Выйти')
-
-file_name = 'data.txt'
+def display_menu():
+    print('0 - Отобразить список всех записей')
+    print('1 - Поиск по ключевому слову')
+    print('2 - Добавить новую запись')
+    print('3 - Изменить запись')
+    print('4 - Удалить запись')
+    print('5 - Выйти')
 
 
 def switchboard():
@@ -117,5 +115,6 @@ def switchboard():
             case _:
                 return False
 
-
+file_name = 'data.txt'
+display_menu()
 switchboard()
