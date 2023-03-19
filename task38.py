@@ -37,6 +37,8 @@ def output_data(file_name: str, rows: [int]) -> [str]:
     if len(rows) > 0:
         entries = get_entries(file_name)
         output_entries = [entries[i] for i in rows]
+    else:
+        print('Нет данных')
     return output_entries
 
 
@@ -62,7 +64,7 @@ def update_data(file_name: str, new_entry: str, at_row: int):
         save_data(file_name, entries_formated)
         print(f'Данные в строке {at_row} обновлены\n')
     else:
-        print(f'Нет данных в строке {at_row}\n')
+        print(f'Данные в строке {at_row} отсутствуют\n')
 
 
 def delete_data(file_name: str, at_row: int) -> [str]:
@@ -73,7 +75,7 @@ def delete_data(file_name: str, at_row: int) -> [str]:
         save_data(file_name, entries_formated)
         print(f'Данные в строке {at_row} удалены\n')
     else:
-        print(f'Нет данных в строке {at_row}\n')
+        print(f'Данные в строке {at_row} отсутствуют\n')
 
 
 def display_menu():
@@ -95,29 +97,29 @@ def switchboard():
                 all_entries = get_entries(file_name)
                 print('*** Все записи ***')
                 for entry_id, row in enumerate(all_entries):
-                    print(f'{entry_id} – {row}')
+                    print(f'ID {entry_id} – {row}')
                 return switchboard()
             case 1:
                 print('*** Поиск ***')
-                keyword = input('Введите ключевое слово для поиска: ')
+                keyword = input('Введите ключевое слово: ')
                 found_data = find_data(file_name, keyword)
-                print(f'Найдено: {len(found_data)}')
+                print(f'Найдено {len(found_data)}')
                 print(*output_data(file_name, found_data), sep='\n')
                 return switchboard()
             case 2:
-                print('*** Добавление новой записи ***')
+                print('*** Добавить новую запись ***')
                 new_entry = input('Введите ФИО, телефон: ')
                 add_data(file_name, new_entry)
                 return switchboard()
             case 3:
-                print('*** Изменение записи ***')
-                entry_id = int(input('Введите номер записи: '))
-                update_entry = input('Введите новые данные – ФИО, телефон: ')
+                print('*** Изменить запись ***')
+                entry_id = int(input('Введите ID номер записи: '))
+                update_entry = input('Введите новые данные (ФИО, телефон): ')
                 update_data(file_name, update_entry, entry_id)
                 return switchboard()
             case 4:
-                print('*** Удаление записи ***')
-                delete_id = int(input('Введите номер записи которую нужно удалить: '))
+                print('*** Удалить запись ***')
+                delete_id = int(input('Введите ID номер записи которую нужно удалить: '))
                 delete_data(file_name, delete_id)
                 return switchboard()
             case 5:
