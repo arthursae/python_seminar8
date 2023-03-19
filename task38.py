@@ -76,13 +76,46 @@ def delete_data(file_name: str, at_row: int) -> [str]:
         print(f'Нет данных в строке {at_row}')
 
 
+print('0 - Отобразить список всех записей')
+print('1 - Поиск по ключевому слову')
+print('2 - Добавить новую запись')
+print('3 - Изменить запись')
+print('4 - Удалить запись')
+print('5 - Выйти')
+
 file_name = 'data.txt'
 
-new_entry = 'Фамилия5 Имя5 Отчество5,+555555555555'
-# add_data(file_name, new_entry)
-# found_data = find_data(file_name, ' мил ')
-# print(f'Найдено: {len(found_data)}')
-# print(*output_data(file_name, found_data), sep='\n')
-# update_data(file_name, 'Фамилия99 Имя99 Отчество99,+999999999999', 2)
-# delete_data(file_name, 3)
-print(*get_entries(file_name), sep='\n')
+
+def switchboard():
+    mode = int(input('Введите опцию 0-5: '))
+    while True:
+        match mode:
+            case 0:
+                print(*get_entries(file_name), sep='\n')
+                return switchboard()
+            case 1:
+                keyword = input('Введите ключевое слово для поиска: ')
+                found_data = find_data(file_name, keyword)
+                print(f'Найдено: {len(found_data)}')
+                print(*output_data(file_name, found_data), sep='\n')
+                return switchboard()
+            case 2:
+                new_entry = input('Введите ФИО, телефон: ')
+                add_data(file_name, new_entry)
+                return switchboard()
+            case 3:
+                entry_id = int(input('Введите номер записи: '))
+                update_entry = input('Введите новые данные ФИО, телефон: ')
+                update_data(file_name, update_entry, entry_id)
+                return switchboard()
+            case 4:
+                delete_id = int(input('Введите номер записи которую нужно удалить: '))
+                delete_data(file_name, delete_id)
+                return switchboard()
+            case 5:
+                return False
+            case _:
+                return False
+
+
+switchboard()
