@@ -75,8 +75,10 @@ def delete_data(file_name: str, at_row: int) -> [str]:
     else:
         print(f'Нет данных в строке {at_row}\n')
 
+
 def display_menu():
-    print('\n0 - Отобразить список всех записей')
+    print('\nМЕНЮ:')
+    print('0 - Отобразить список всех записей')
     print('1 - Поиск по ключевому слову')
     print('2 - Добавить новую запись')
     print('3 - Изменить запись')
@@ -85,12 +87,14 @@ def display_menu():
 
 
 def switchboard():
-    display_menu()
     mode = int(input('Введите опцию 0-5: '))
     while True:
         match mode:
             case 0:
-                print(*get_entries(file_name), sep='\n')
+                all_entries = get_entries(file_name)
+                print('Все записи:')
+                for entry_id, row in enumerate(all_entries):
+                    print(f'{entry_id} – {row}')
                 return switchboard()
             case 1:
                 keyword = input('Введите ключевое слово для поиска: ')
@@ -103,7 +107,7 @@ def switchboard():
                 add_data(file_name, new_entry)
                 return switchboard()
             case 3:
-                entry_id = int(input('Введите номер записи: '))
+                entry_id = int(input('Введите номер записи, которую нужно изменть: '))
                 update_entry = input('Введите новые данные ФИО, телефон: ')
                 update_data(file_name, update_entry, entry_id)
                 return switchboard()
@@ -116,5 +120,7 @@ def switchboard():
             case _:
                 return False
 
+
 file_name = 'data.txt'
+display_menu()
 switchboard()
