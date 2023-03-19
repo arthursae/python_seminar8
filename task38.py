@@ -103,8 +103,10 @@ def switchboard():
                 print('*** Поиск ***')
                 keyword = input('Введите ключевое слово: ')
                 found_data = find_data(file_name, keyword)
-                print(f'Найдено {len(found_data)}')
-                print(*output_data(file_name, found_data), sep='\n')
+                found_total = len(found_data)
+                print(f'Найдено {found_total}')
+                if found_total > 0:
+                    print(*output_data(file_name, found_data), sep='\n')
                 return switchboard()
             case 2:
                 print('*** Добавить новую запись ***')
